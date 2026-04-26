@@ -3,6 +3,7 @@ package com.maadurga.jewellers.controller.admin;
 import com.maadurga.jewellers.entity.Category;
 import com.maadurga.jewellers.entity.Product;
 import com.maadurga.jewellers.service.CategoryService;
+import com.maadurga.jewellers.service.CloudinaryService;
 import com.maadurga.jewellers.service.InquiryService;
 import com.maadurga.jewellers.service.ProductService;
 import org.springframework.stereotype.Controller;
@@ -24,17 +25,28 @@ public class AdminController {
     private final ProductService productService;
     private final CategoryService categoryService;
     private final InquiryService inquiryService;
+    private final CloudinaryService cloudinaryService;
 
     // folder where uploaded images are saved
     private static final String UPLOAD_DIR = "uploads/images/products/";
     // private static final String UPLOAD_DIR = "src/main/resources/static/images/products/";
 
+//    public AdminController(ProductService productService,
+//                           CategoryService categoryService,
+//                           InquiryService inquiryService) {
+//        this.productService = productService;
+//        this.categoryService = categoryService;
+//        this.inquiryService = inquiryService;
+//    }
+
     public AdminController(ProductService productService,
                            CategoryService categoryService,
-                           InquiryService inquiryService) {
+                           InquiryService inquiryService,
+                           CloudinaryService cloudinaryService) {
         this.productService = productService;
         this.categoryService = categoryService;
         this.inquiryService = inquiryService;
+        this.cloudinaryService = cloudinaryService;
     }
 
     // ── Login ────────────────────────────────────────
@@ -83,21 +95,38 @@ public class AdminController {
         return "admin/product-form";
     }
 
+//    @PostMapping("/products/save")
+//    public String saveProduct(@ModelAttribute Product product,
+//                              @RequestParam("imageFile") MultipartFile imageFile,
+//                              RedirectAttributes redirectAttributes) throws IOException {
+//
+//        // handle image upload if a file was selected
+//        if (!imageFile.isEmpty()) {
+//            String filename = System.currentTimeMillis()
+//                    + "_" + imageFile.getOriginalFilename();
+//            Path uploadPath = Paths.get(UPLOAD_DIR);
+//            Files.createDirectories(uploadPath);
+//            Files.copy(imageFile.getInputStream(),
+//                    uploadPath.resolve(filename),
+//                    StandardCopyOption.REPLACE_EXISTING);
+//            product.setImageUrl("/images/products/" + filename);
+//        }
+//
+//        productService.saveProduct(product);
+//        redirectAttributes.addFlashAttribute("successMessage", "Product saved successfully.");
+//        return "redirect:/admin/products";
+//    }
+
+
     @PostMapping("/products/save")
     public String saveProduct(@ModelAttribute Product product,
                               @RequestParam("imageFile") MultipartFile imageFile,
                               RedirectAttributes redirectAttributes) throws IOException {
 
-        // handle image upload if a file was selected
+        // Upload to Cloudinary if a file was selected
         if (!imageFile.isEmpty()) {
-            String filename = System.currentTimeMillis()
-                    + "_" + imageFile.getOriginalFilename();
-            Path uploadPath = Paths.get(UPLOAD_DIR);
-            Files.createDirectories(uploadPath);
-            Files.copy(imageFile.getInputStream(),
-                    uploadPath.resolve(filename),
-                    StandardCopyOption.REPLACE_EXISTING);
-            product.setImageUrl("/images/products/" + filename);
+            String imageUrl = cloudinaryService.uploadImage(imageFile);
+            product.setImageUrl(imageUrl);
         }
 
         productService.saveProduct(product);
