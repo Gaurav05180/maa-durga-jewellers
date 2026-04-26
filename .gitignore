@@ -31,3 +31,18 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Maven
+target/
+
+# Local environment
+*.env
+.env
+
+# IDE files
+.idea/
+*.iml
+.vscode/
+
+# Uploaded images (local only)
+uploads/
