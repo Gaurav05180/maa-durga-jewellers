@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Admin Login – Maa Durga Jewellers</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: sans-serif;
+            background: #111;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .card {
+            background: #1a1a1a;
+            border: 1px solid #b8960c;
+            border-radius: 12px;
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 380px;
+            text-align: center;
+        }
+        h1 { color: #b8960c; font-size: 1.4rem; margin-bottom: 0.3rem; }
+        p  { color: #888; font-size: 0.85rem; margin-bottom: 1.8rem; }
+        input {
+            width: 100%;
+            padding: 0.7rem 1rem;
+            margin-bottom: 1rem;
+            background: #111;
+            border: 1px solid #333;
+            border-radius: 6px;
+            color: #fff;
+            font-size: 0.95rem;
+        }
+        input:focus { outline: none; border-color: #b8960c; }
+        button {
+            width: 100%;
+            padding: 0.75rem;
+            background: #b8960c;
+            color: #111;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        button:hover { background: #d4a914; }
+        .error {
+            background: #3a0000;
+            color: #ff6b6b;
+            border-radius: 6px;
+            padding: 0.6rem;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+        }
+        .success {
+            background: #003a00;
+            color: #6bff6b;
+            border-radius: 6px;
+            padding: 0.6rem;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h1>Maa Durga Jewellers</h1>
+    <p>Admin Panel — Sign in to continue</p>
+
+    <div class="error" th:if="${param.error}">
+        Invalid username or password.
+    </div>
+    <div class="success" th:if="${param.logout}">
+        You have been logged out.
+    </div>
+
+    <form th:action="@{/admin/login}" method="post">
+        <input type="text"     name="username" placeholder="Username" required autofocus/>
+        <input type="password" name="password" placeholder="Password" required/>
+        <button type="submit">Sign In</button>
+    </form>
+
+    <div style="text-align:center; margin-top:1.25rem;">
+        <a href="/" style="color:#888; font-size:0.85rem; text-decoration:none;
+       transition:color 0.2s;">
+            ← Back to Website
+        </a>
+    </div>
+</div>
+</body>
+</html>

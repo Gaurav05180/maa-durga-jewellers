@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Inquiries — Admin</title>
+    <link rel="stylesheet" th:href="@{/css/admin.css}"/>
+</head>
+<body class="admin-body">
+
+<!-- Mobile overlay -->
+<div class="admin-overlay" id="adminOverlay"></div>
+
+<!-- Mobile top bar -->
+<div class="admin-topbar">
+    <span class="admin-topbar-title">✦ Admin Panel</span>
+    <button class="admin-menu-toggle" id="adminMenuToggle">
+        <span></span><span></span><span></span>
+    </button>
+</div>
+
+<div class="admin-layout">
+    <aside class="admin-sidebar">
+        <div class="admin-logo">✦ Admin Panel</div>
+        <nav class="admin-nav">
+            <a th:href="@{/admin/dashboard}">Dashboard</a>
+            <a th:href="@{/admin/products}">Products</a>
+            <a th:href="@{/admin/categories}">Categories</a>
+            <a th:href="@{/admin/inquiries}" class="active">
+                Inquiries
+                <span class="badge" th:if="${unreadCount > 0}" th:text="${unreadCount}"></span>
+            </a>
+            <a th:href="@{/}">View Site</a>
+            <a th:href="@{/admin/logout}" class="logout">Logout</a>
+        </nav>
+    </aside>
+    <main class="admin-main">
+        <div class="admin-header">
+            <h1>Customer Inquiries</h1>
+        </div>
+        <div class="admin-card">
+            <table class="admin-table" th:if="${not #lists.isEmpty(inquiries)}">
+                <thead>
+                <tr>
+                    <th>Name</th><th>Email</th><th>Phone</th>
+                    <th>Message</th><th>Date</th><th>Status</th><th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="inq : ${inquiries}"
+                    th:classappend="${!inq.read ? 'unread-row' : ''}">
+                    <td th:text="${inq.name}"></td>
+                    <td th:text="${inq.email}"></td>
+                    <td th:text="${inq.phone ?: '—'}"></td>
+                    <td class="msg-cell" th:text="${inq.message}"></td>
+                    <td th:text="${#temporals.format(inq.createdAt, 'dd MMM yyyy')}"></td>
+                    <td>
+                        <span class="badge-status unread" th:if="${!inq.read}">New</span>
+                        <span class="badge-status read"   th:if="${inq.read}">Read</span>
+                    </td>
+                    <td class="action-btns">
+                        <a th:if="${!inq.read}"
+                           th:href="@{/admin/inquiries/mark-read/{id}(id=${inq.id})}"
+                           class="btn-edit">Mark Read</a>
+                        <a th:href="@{/admin/inquiries/delete/{id}(id=${inq.id})}"
+                           class="btn-delete"
+                           onclick="return confirm('Delete this inquiry?')">Delete</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <p th:if="${#lists.isEmpty(inquiries)}" class="empty-msg">No inquiries yet.</p>
+        </div>
+    </main>
+</div>
+
+<script>
+    const toggle   = document.getElementById('adminMenuToggle');
+    const sidebar  = document.querySelector('.admin-sidebar');
+    const overlay  = document.getElementById('adminOverlay');
+
+    toggle.addEventListener('click', function () {
+        sidebar.classList.toggle('open');
+        overlay.classList.toggle('active');
+    });
+
+    overlay.addEventListener('click', function () {
+        sidebar.classList.remove('open');
+        overlay.classList.remove('active');
+    });
+</script>
+
+</body>
+</html>

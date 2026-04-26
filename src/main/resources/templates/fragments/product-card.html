@@ -1,0 +1,36 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<body>-->
+<!--<div th:fragment="productCard(product)" class="product-card">-->
+<!--    <a th:href="@{/products/{id}(id=${product.id})}" class="product-card-link">-->
+<!--        <div class="product-card-image">-->
+<!--            <img th:if="${product.imageUrl != null}"-->
+<!--                 th:src="${product.imageUrl}"-->
+<!--                 th:alt="${product.name}"/>-->
+<!--            <div th:if="${product.imageUrl == null}" class="product-card-placeholder">-->
+<!--                <span>✦</span>-->
+<!--            </div>-->
+<!--            <div class="product-card-overlay">-->
+<!--                <span>View Details</span>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="product-card-info">-->
+<!--            <p class="product-card-category"-->
+<!--               th:text="${product.category != null ? product.category.name : ''}"></p>-->
+<!--            <h3 class="product-card-name" th:text="${product.name}"></h3>-->
+<!--            <p class="product-card-material" th:text="${product.material}"></p>-->
+<!--            <p class="product-card-price"-->
+<!--               th:text="'₹ ' + ${#numbers.formatDecimal(product.price, 1, 'COMMA', 2, 'POINT')}"></p>-->
+<!--        </div>-->
+<!--    </a>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="productCard">
+</div>
+</body>
+</html>

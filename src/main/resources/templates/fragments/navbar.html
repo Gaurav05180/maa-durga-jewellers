@@ -1,0 +1,136 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<body>-->
+<!--<nav th:fragment="navbar" class="navbar">-->
+<!--    <div class="navbar-container">-->
+<!--        <a th:href="@{/}" class="navbar-brand">-->
+<!--            <span class="brand-icon">✦</span>-->
+<!--            <span class="brand-name">Maa Durga Jewellers</span>-->
+<!--        </a>-->
+
+<!--        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">-->
+<!--            <span></span><span></span><span></span>-->
+<!--        </button>-->
+
+<!--        <ul class="nav-links" id="navLinks">-->
+<!--            <li><a th:href="@{/}"         th:classappend="${#httpServletRequest.requestURI == '/'         ? 'active' : ''}">Home</a></li>-->
+<!--            <li><a th:href="@{/products}" th:classappend="${#httpServletRequest.requestURI.startsWith('/products') ? 'active' : ''}">Collection</a></li>-->
+<!--            <li><a th:href="@{/contact}"  th:classappend="${#httpServletRequest.requestURI == '/contact'   ? 'active' : ''}">Contact</a></li>-->
+<!--        </ul>-->
+<!--    </div>-->
+<!--</nav>-->
+<!--</body>-->
+<!--</html>-->
+
+
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<body>-->
+<!--<nav th:fragment="navbar" class="navbar">-->
+<!--    <div class="navbar-container">-->
+<!--        <a th:href="@{/}" class="navbar-brand">-->
+<!--            <span class="brand-icon">✦</span>-->
+<!--            <span class="brand-name">Maa Durga Jewellers</span>-->
+<!--        </a>-->
+
+<!--        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">-->
+<!--            <span></span><span></span><span></span>-->
+<!--        </button>-->
+
+<!--        <ul class="nav-links" id="navLinks">-->
+<!--            <li><a th:href="@{/}">Home</a></li>-->
+<!--            <li><a th:href="@{/products}">Collection</a></li>-->
+<!--            <li><a th:href="@{/contact}">Contact</a></li>-->
+<!--        </ul>-->
+<!--    </div>-->
+<!--</nav>-->
+<!--</body>-->
+<!--</html>-->
+
+
+
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<body>-->
+<!--<nav th:fragment="navbar" class="navbar">-->
+<!--    <div class="navbar-container">-->
+<!--        <a th:href="@{/}" class="navbar-brand">-->
+<!--            <span class="brand-icon">✦</span>-->
+<!--            <span class="brand-name shimmer-text">Maa Durga Jewellers</span>-->
+<!--        </a>-->
+
+<!--        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">-->
+<!--            <span></span><span></span><span></span>-->
+<!--        </button>-->
+
+<!--        <ul class="nav-links" id="navLinks">-->
+<!--            <li><a th:href="@{/}">Home</a></li>-->
+<!--            <li><a th:href="@{/products}">Collection</a></li>-->
+<!--            <li><a th:href="@{/contact}">Contact</a></li>-->
+<!--            <li>-->
+<!--                <a th:href="@{/admin/dashboard}"-->
+<!--                   th:if="${#authorization.expression('isAuthenticated()')}"-->
+<!--                   class="btn-nav-admin">Admin Panel</a>-->
+<!--                <a th:href="@{/admin/login}"-->
+<!--                   th:unless="${#authorization.expression('isAuthenticated()')}"-->
+<!--                   class="btn-nav-admin">Admin Login</a>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </div>-->
+<!--</nav>-->
+<!--</body>-->
+<!--</html>-->
+
+
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<body>
+<nav th:fragment="navbar" class="navbar">
+
+    <!-- Top gold micro-bar -->
+    <div class="navbar-topbar">
+        <span>✦ Free consultation for custom jewellery designs</span>
+        <span>📞 +91 87078 59120</span>
+    </div>
+
+    <div class="navbar-container">
+
+        <!-- Logo + Brand -->
+        <a th:href="@{/}" class="navbar-brand">
+            <img th:src="@{/images/logo.png}"
+                 alt="Maa Durga Jewellers Logo"
+                 class="navbar-logo"
+                 onerror="this.style.display='none'"/>
+            <div class="navbar-brand-text">
+                <span class="brand-name">Maa Durga Jewellers</span>
+                <span class="brand-tagline">Since Generations</span>
+            </div>
+        </a>
+
+        <!-- Mobile toggle -->
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
+
+        <!-- Nav links -->
+        <ul class="nav-links" id="navLinks">
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/products}">Collection</a></li>
+            <li><a th:href="@{/contact}">Contact</a></li>
+            <li>
+                <a th:href="@{/admin/dashboard}"
+                   sec:authorize="isAuthenticated()"
+                   class="btn-nav-admin">Admin Panel</a>
+                <a th:href="@{/admin/login}"
+                   sec:authorize="!isAuthenticated()"
+                   class="btn-nav-admin">Admin Login</a>
+            </li>
+        </ul>
+    </div>
+
+</nav>
+</body>
+</html>

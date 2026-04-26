@@ -1,0 +1,91 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<body>-->
+<!--<footer th:fragment="footer" class="footer">-->
+<!--    <div class="footer-container">-->
+<!--        <div class="footer-brand">-->
+<!--            <span class="brand-icon">✦</span>-->
+<!--            <span class="brand-name">Maa Durga Jewellers</span>-->
+<!--            <p>Crafting timeless jewellery since generations. Every piece tells a story of elegance and tradition.</p>-->
+<!--        </div>-->
+<!--        <div class="footer-links">-->
+<!--            <h4>Quick Links</h4>-->
+<!--            <ul>-->
+<!--                <li><a th:href="@{/}">Home</a></li>-->
+<!--                <li><a th:href="@{/products}">Collection</a></li>-->
+<!--                <li><a th:href="@{/contact}">Contact Us</a></li>-->
+<!--            </ul>-->
+<!--        </div>-->
+<!--        <div class="footer-contact">-->
+<!--            <h4>Visit Us</h4>-->
+<!--            <p>B48 Christian Colony, Patel Chest<br/>New Delhi, Delhi – 110007</p>-->
+<!--            <p>📞 +91 87078 59120</p>-->
+<!--            <p>✉ info@maadurgajewellers.com</p>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="footer-bottom">-->
+<!--        <p>© 2026 Maa Durga Jewellers. All rights reserved.</p>-->
+<!--    </div>-->
+<!--</footer>-->
+<!--</body>-->
+<!--</html>-->
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<footer th:fragment="footer" class="footer">
+
+    <!-- Wave SVG separator -->
+    <div class="footer-wave">
+        <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+            <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z"
+                  fill="#0f0f0f"/>
+        </svg>
+    </div>
+
+    <div class="footer-container">
+
+        <div class="footer-brand" data-aos="fade-up">
+            <div class="footer-logo">
+                <span class="brand-icon shimmer-text">✦</span>
+                <span class="brand-name">Maa Durga Jewellers</span>
+            </div>
+            <p>Crafting timeless jewellery since generations. Every piece tells a story of elegance, devotion, and tradition.</p>
+            <div class="footer-socials">
+                <a href="#" class="social-btn" title="Instagram">𝕀</a>
+                <a href="#" class="social-btn" title="Facebook">𝔽</a>
+                <a href="#" class="social-btn" title="WhatsApp">𝕎</a>
+            </div>
+        </div>
+
+        <div class="footer-links" data-aos="fade-up" data-aos-delay="100">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a th:href="@{/}">Home</a></li>
+                <li><a th:href="@{/products}">Collection</a></li>
+                <li><a th:href="@{/contact}">Contact Us</a></li>
+                <li><a th:href="@{/admin/login}">Admin</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-contact" data-aos="fade-up" data-aos-delay="200">
+            <h4>Visit Us</h4>
+            <p>B48 Christian Colony<br/>New Delhi, Delhi – 110007</p>
+            <p style="margin-top:0.75rem;">📞 +91 87078 59120</p>
+            <p>✉ info@maadurgajewellers.com</p>
+            <p style="margin-top:0.75rem;">Mon–Sat: 10am – 8pm</p>
+        </div>
+
+    </div>
+
+    <!-- Gold divider line -->
+    <div class="footer-divider-line"></div>
+
+    <div class="footer-bottom">
+        <p>© 2026 Maa Durga Jewellers. All rights reserved. Crafted with ✦ and devotion.</p>
+    </div>
+
+</footer>
+</body>
+</html>

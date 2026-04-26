@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Dashboard — Admin</title>
+    <link rel="stylesheet" th:href="@{/css/admin.css}"/>
+</head>
+<body class="admin-body">
+
+<!-- Mobile overlay -->
+<div class="admin-overlay" id="adminOverlay"></div>
+
+<!-- Mobile top bar -->
+<div class="admin-topbar">
+    <span class="admin-topbar-title">✦ Admin Panel</span>
+    <button class="admin-menu-toggle" id="adminMenuToggle">
+        <span></span><span></span><span></span>
+    </button>
+</div>
+
+<div class="admin-layout">
+
+    <aside class="admin-sidebar">
+        <div class="admin-logo">✦ Admin Panel</div>
+        <nav class="admin-nav">
+            <a th:href="@{/admin/dashboard}"  class="active">Dashboard</a>
+            <a th:href="@{/admin/products}">Products</a>
+            <a th:href="@{/admin/categories}">Categories</a>
+            <a th:href="@{/admin/inquiries}">
+                Inquiries
+                <span class="badge" th:if="${unreadInquiries > 0}"
+                      th:text="${unreadInquiries}"></span>
+            </a>
+            <a th:href="@{/}">View Site</a>
+            <a th:href="@{/admin/logout}" class="logout">Logout</a>
+        </nav>
+    </aside>
+
+    <main class="admin-main">
+        <div class="admin-header">
+            <h1>Dashboard</h1>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <p class="stat-label">Total Products</p>
+                <p class="stat-value" th:text="${totalProducts}">0</p>
+            </div>
+            <div class="stat-card">
+                <p class="stat-label">Categories</p>
+                <p class="stat-value" th:text="${totalCategories}">0</p>
+            </div>
+            <div class="stat-card">
+                <p class="stat-label">Unread Inquiries</p>
+                <p class="stat-value gold" th:text="${unreadInquiries}">0</p>
+            </div>
+        </div>
+
+        <div class="admin-card">
+            <h2>Recent Inquiries</h2>
+            <table class="admin-table" th:if="${not #lists.isEmpty(recentInquiries)}">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="inq : ${recentInquiries}"
+                    th:classappend="${!inq.read ? 'unread-row' : ''}">
+                    <td th:text="${inq.name}"></td>
+                    <td th:text="${inq.email}"></td>
+                    <td th:text="${inq.phone}"></td>
+                    <td th:text="${#temporals.format(inq.createdAt, 'dd MMM yyyy')}"></td>
+                    <td>
+                        <span class="badge-status unread" th:if="${!inq.read}">New</span>
+                        <span class="badge-status read"   th:if="${inq.read}">Read</span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <p th:if="${#lists.isEmpty(recentInquiries)}" class="empty-msg">No inquiries yet.</p>
+        </div>
+    </main>
+</div>
+
+<script>
+    const toggle   = document.getElementById('adminMenuToggle');
+    const sidebar  = document.querySelector('.admin-sidebar');
+    const overlay  = document.getElementById('adminOverlay');
+
+    toggle.addEventListener('click', function () {
+        sidebar.classList.toggle('open');
+        overlay.classList.toggle('active');
+    });
+
+    overlay.addEventListener('click', function () {
+        sidebar.classList.remove('open');
+        overlay.classList.remove('active');
+    });
+</script>
+
+</body>
+</html>

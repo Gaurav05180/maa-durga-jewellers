@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Product Form — Admin</title>
+    <link rel="stylesheet" th:href="@{/css/admin.css}"/>
+</head>
+<body class="admin-body">
+
+<!-- Mobile overlay -->
+<div class="admin-overlay" id="adminOverlay"></div>
+
+<!-- Mobile top bar -->
+<div class="admin-topbar">
+    <span class="admin-topbar-title">✦ Admin Panel</span>
+    <button class="admin-menu-toggle" id="adminMenuToggle">
+        <span></span><span></span><span></span>
+    </button>
+</div>
+
+<div class="admin-layout">
+    <aside class="admin-sidebar">
+        <div class="admin-logo">✦ Admin Panel</div>
+        <nav class="admin-nav">
+            <a th:href="@{/admin/dashboard}">Dashboard</a>
+            <a th:href="@{/admin/products}" class="active">Products</a>
+            <a th:href="@{/admin/categories}">Categories</a>
+            <a th:href="@{/admin/inquiries}">Inquiries</a>
+            <a th:href="@{/}">View Site</a>
+            <a th:href="@{/admin/logout}" class="logout">Logout</a>
+        </nav>
+    </aside>
+    <main class="admin-main">
+        <div class="admin-header">
+            <h1 th:text="${product.id != null ? 'Edit Product' : 'Add New Product'}"></h1>
+            <a th:href="@{/admin/products}" class="btn-outline-admin">← Back</a>
+        </div>
+        <div class="admin-card">
+            <form th:action="@{/admin/products/save}" th:object="${product}"
+                  method="post" enctype="multipart/form-data">
+                <input type="hidden" th:field="*{id}"/>
+                <input type="hidden" th:field="*{imageUrl}"/>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Product Name *</label>
+                        <input type="text" th:field="*{name}" placeholder="e.g. Gold Kundan Necklace" required/>
+                    </div>
+                    <div class="form-group">
+                        <label>Category *</label>
+                        <select th:field="*{category.id}" required>
+                            <option value="">-- Select Category --</option>
+                            <option th:each="cat : ${categories}"
+                                    th:value="${cat.id}"
+                                    th:text="${cat.name}"></option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Price (₹) *</label>
+                        <input type="number" th:field="*{price}" step="0.01" placeholder="e.g. 25000.00" required/>
+                    </div>
+                    <div class="form-group">
+                        <label>Material</label>
+                        <input type="text" th:field="*{material}" placeholder="e.g. 22K Gold"/>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Weight</label>
+                        <input type="text" th:field="*{weight}" placeholder="e.g. 12.5g"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Product Image</label>
+                        <input type="file" name="imageFile" accept="image/*"/>
+                        <small th:if="${product.imageUrl != null}">
+                            Current: <span th:text="${product.imageUrl}"></span>
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea th:field="*{description}" rows="4"
+                              placeholder="Describe the product..."></textarea>
+                </div>
+
+                <div class="form-row form-checks">
+                    <label class="check-label">
+                        <input type="checkbox" th:field="*{featured}"/> Mark as Featured
+                    </label>
+                    <label class="check-label">
+                        <input type="checkbox" th:field="*{active}"/> Active (visible on site)
+                    </label>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-admin-gold">Save Product</button>
+                    <a th:href="@{/admin/products}" class="btn-outline-admin">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </main>
+</div>
+
+<script>
+    const toggle   = document.getElementById('adminMenuToggle');
+    const sidebar  = document.querySelector('.admin-sidebar');
+    const overlay  = document.getElementById('adminOverlay');
+
+    toggle.addEventListener('click', function () {
+        sidebar.classList.toggle('open');
+        overlay.classList.toggle('active');
+    });
+
+    overlay.addEventListener('click', function () {
+        sidebar.classList.remove('open');
+        overlay.classList.remove('active');
+    });
+</script>
+
+</body>
+</html>

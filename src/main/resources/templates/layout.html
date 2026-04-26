@@ -1,0 +1,91 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org"-->
+<!--      th:fragment="layout(title, content)">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8"/>-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>-->
+<!--    <title th:replace="${title}">Maa Durga Jewellers</title>-->
+<!--    <link rel="stylesheet" th:href="@{/css/style.css}"/>-->
+<!--    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>-->
+<!--    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet"/>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--&lt;!&ndash; Navbar Fragment &ndash;&gt;-->
+<!--<div th:replace="~{fragments/navbar :: navbar}"></div>-->
+
+<!--&lt;!&ndash; Page Content &ndash;&gt;-->
+<!--<main th:replace="${content}">-->
+<!--    &lt;!&ndash; page content goes here &ndash;&gt;-->
+<!--</main>-->
+
+<!--&lt;!&ndash; Footer Fragment &ndash;&gt;-->
+<!--<div th:replace="~{fragments/footer :: footer}"></div>-->
+
+<!--<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>-->
+<!--<script>-->
+<!--    AOS.init({-->
+<!--        duration: 900,-->
+<!--        easing:   'ease-out-cubic',-->
+<!--        once:     true,-->
+<!--        offset:   80-->
+<!--    });-->
+<!--</script>-->
+<!--<script src="https://unpkg.com/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script>-->
+<!--<script th:src="@{/js/main.js}"></script>-->
+<!--</body>-->
+<!--</html>-->
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:fragment="layout(title, content)">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Maa Durga Jewellers — Timeless handcrafted gold and silver jewellery. Browse our premium collection of necklaces, rings, earrings and bangles."/>
+    <meta name="theme-color" content="#b8960c"/>
+
+    <title th:replace="${title}">Maa Durga Jewellers</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" th:href="@{/favicon.ico}"/>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet"/>
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+
+<!-- Page transition overlay -->
+<div class="page-transition" id="pageTransition"></div>
+
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<main th:replace="${content}">
+</main>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+<!-- Scripts -->
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://unpkg.com/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script>
+<script th:src="@{/js/main.js}"></script>
+
+<script>
+    AOS.init({
+        duration: 900,
+        easing:   'ease-out-cubic',
+        once:     true,
+        offset:   80
+    });
+</script>
+</body>
+</html>

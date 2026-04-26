@@ -1,0 +1,296 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org"-->
+<!--      th:replace="~{layout :: layout(~{::title}, ~{::main})}">-->
+<!--<head>-->
+<!--    <title>Maa Durga Jewellers — Timeless Elegance</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<main>-->
+<!--    &lt;!&ndash; Hero Section &ndash;&gt;-->
+<!--    <section class="hero">-->
+<!--        &lt;!&ndash; Background Video &ndash;&gt;-->
+<!--        <video class="hero-video" autoplay muted loop playsinline>-->
+<!--            <source th:src="@{/videos/hero-bg.mp4}" type="video/mp4"/>-->
+<!--        </video>-->
+<!--        &lt;!&ndash; Dark + Gold Overlay &ndash;&gt;-->
+<!--        <div class="hero-overlay"></div>-->
+
+<!--        <div class="hero-content">-->
+<!--            <p class="hero-subtitle">✦ &nbsp; Crafted with Devotion &nbsp; ✦</p>-->
+<!--            <h1 class="hero-title">-->
+<!--                Timeless Jewellery<br/>-->
+<!--                <span class="shimmer-text">for Every Occasion</span>-->
+<!--            </h1>-->
+<!--            <p class="hero-desc">Discover our exquisite collection of handcrafted gold, silver and diamond jewellery — each piece a masterpiece of tradition and elegance.</p>-->
+<!--            <div class="hero-actions">-->
+<!--                <a th:href="@{/products}" class="btn-gold">Explore Collection</a>-->
+<!--                <a th:href="@{/contact}"  class="btn-outline">Contact Us</a>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        &lt;!&ndash; Scroll indicator &ndash;&gt;-->
+<!--        <div class="hero-scroll">-->
+<!--            <span>Scroll</span>-->
+<!--            <div class="hero-scroll-line"></div>-->
+<!--        </div>-->
+<!--    </section>-->
+
+<!--    &lt;!&ndash; Categories Section &ndash;&gt;-->
+<!--    <section class="section" th:if="${not #lists.isEmpty(categories)}">-->
+<!--        <div class="container">-->
+<!--            <div class="section-header">-->
+<!--                <p class="section-label">Browse By</p>-->
+<!--                <h2 class="section-title">Our Collections</h2>-->
+<!--                <div class="section-divider"></div>-->
+<!--            </div>-->
+<!--            <div class="categories-grid">-->
+<!--                <a th:each="cat : ${categories}"-->
+<!--                   th:href="@{/products/category/{slug}(slug=${cat.slug})}"-->
+<!--                   class="category-card">-->
+<!--                    <span class="category-icon">✦</span>-->
+<!--                    <h3 th:text="${cat.name}"></h3>-->
+<!--                    <p th:text="${cat.description}"></p>-->
+<!--                </a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </section>-->
+
+<!--    &lt;!&ndash; Featured Products Section &ndash;&gt;-->
+<!--    <section class="section section-dark" th:if="${not #lists.isEmpty(featuredProducts)}">-->
+<!--        <div class="container">-->
+<!--            <div class="section-header">-->
+<!--                <p class="section-label">Handpicked For You</p>-->
+<!--                <h2 class="section-title">Featured Pieces</h2>-->
+<!--                <div class="section-divider"></div>-->
+<!--            </div>-->
+<!--            <div class="products-grid">-->
+<!--                <div th:each="product : ${featuredProducts}" class="product-card">-->
+<!--                    <a th:href="@{/products/{id}(id=${product.id})}" class="product-card-link">-->
+<!--                        <div class="product-card-image">-->
+<!--                            <img th:if="${product.imageUrl != null}" th:src="${product.imageUrl}" th:alt="${product.name}"/>-->
+<!--                            <div th:if="${product.imageUrl == null}" class="product-card-placeholder"><span>✦</span></div>-->
+<!--                            <div class="product-card-overlay"><span>View Details</span></div>-->
+<!--                        </div>-->
+<!--                        <div class="product-card-info">-->
+<!--                            <p class="product-card-category" th:text="${product.category != null ? product.category.name : ''}"></p>-->
+<!--                            <h3 class="product-card-name" th:text="${product.name}"></h3>-->
+<!--                            <p class="product-card-material" th:text="${product.material}"></p>-->
+<!--                            <p class="product-card-price" th:text="'₹ ' + ${#numbers.formatDecimal(product.price, 1, 'COMMA', 2, 'POINT')}"></p>-->
+<!--                        </div>-->
+<!--                    </a>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="section-cta">-->
+<!--                <a th:href="@{/products}" class="btn-gold">View Full Collection</a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </section>-->
+
+<!--    &lt;!&ndash; Why Us Section &ndash;&gt;-->
+<!--    <section class="section">-->
+<!--        <div class="container">-->
+<!--            <div class="section-header">-->
+<!--                <p class="section-label">Why Choose Us</p>-->
+<!--                <h2 class="section-title">The Maa Durga Promise</h2>-->
+<!--                <div class="section-divider"></div>-->
+<!--            </div>-->
+<!--            <div class="features-grid">-->
+<!--                <div class="feature-card">-->
+<!--                    <div class="feature-icon">✦</div>-->
+<!--                    <h3>Certified Purity</h3>-->
+<!--                    <p>All our jewellery is hallmarked and certified for guaranteed purity and quality.</p>-->
+<!--                </div>-->
+<!--                <div class="feature-card">-->
+<!--                    <div class="feature-icon">✦</div>-->
+<!--                    <h3>Master Craftsmanship</h3>-->
+<!--                    <p>Each piece is handcrafted by skilled artisans with decades of experience.</p>-->
+<!--                </div>-->
+<!--                <div class="feature-card">-->
+<!--                    <div class="feature-icon">✦</div>-->
+<!--                    <h3>Legacy of Trust</h3>-->
+<!--                    <p>Serving families with love and honesty for generations.</p>-->
+<!--                </div>-->
+<!--                <div class="feature-card">-->
+<!--                    <div class="feature-icon">✦</div>-->
+<!--                    <h3>Custom Designs</h3>-->
+<!--                    <p>Get your dream jewellery made to your exact specifications and taste.</p>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </section>-->
+<!--</main>-->
+<!--</body>-->
+<!--</html>-->
+
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout :: layout(~{::title}, ~{::main})}">
+<head>
+    <title>Maa Durga Jewellers — Timeless Elegance</title>
+</head>
+<body>
+<main>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <video class="hero-video" autoplay muted loop playsinline>
+            <source th:src="@{/videos/hero-bg.mp4}" type="video/mp4"/>
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <p class="hero-subtitle">✦ &nbsp; Crafted with Devotion &nbsp; ✦</p>
+            <h1 class="hero-title">
+                Timeless Jewellery<br/>
+                <span class="shimmer-text">for Every Occasion</span>
+            </h1>
+            <p class="hero-desc">Discover our exquisite collection of handcrafted gold, silver and diamond jewellery — each piece a masterpiece of tradition and elegance.</p>
+            <div class="hero-actions">
+                <a th:href="@{/products}" class="btn-gold">Explore Collection</a>
+                <a th:href="@{/contact}"  class="btn-outline">Contact Us</a>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <span>Scroll</span>
+            <div class="hero-scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="section" th:if="${not #lists.isEmpty(categories)}">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <p class="section-label">Browse By</p>
+                <h2 class="section-title">Our Collections</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="categories-grid">
+                <a th:each="cat, iterStat : ${categories}"
+                   th:href="@{/products/category/{slug}(slug=${cat.slug})}"
+                   class="category-card"
+                   data-aos="fade-up"
+                   th:attr="data-aos-delay=${iterStat.index * 100}">
+                    <span class="category-icon">✦</span>
+                    <h3 th:text="${cat.name}"></h3>
+                    <p th:text="${cat.description}"></p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products Section -->
+    <section class="section section-dark" th:if="${not #lists.isEmpty(featuredProducts)}">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <p class="section-label">Handpicked For You</p>
+                <h2 class="section-title">Featured Pieces</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="products-grid">
+                <div th:each="product, iterStat : ${featuredProducts}"
+                     class="product-card"
+                     data-aos="fade-up"
+                     th:attr="data-aos-delay=${iterStat.index * 120}">
+                    <a th:href="@{/products/{id}(id=${product.id})}" class="product-card-link">
+                        <div class="product-card-image">
+                            <img th:if="${product.imageUrl != null}" th:src="${product.imageUrl}" th:alt="${product.name}"/>
+                            <div th:if="${product.imageUrl == null}" class="product-card-placeholder"><span>✦</span></div>
+                            <div class="product-card-overlay"><span>View Details</span></div>
+                        </div>
+                        <div class="product-card-info">
+                            <p class="product-card-category" th:text="${product.category != null ? product.category.name : ''}"></p>
+                            <h3 class="product-card-name" th:text="${product.name}"></h3>
+                            <p class="product-card-material" th:text="${product.material}"></p>
+                            <p class="product-card-price" th:text="'₹ ' + ${#numbers.formatDecimal(product.price, 1, 'COMMA', 2, 'POINT')}"></p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="section-cta" data-aos="fade-up" data-aos-delay="200">
+                <a th:href="@{/products}" class="btn-gold">View Full Collection</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marquee Trust Strip -->
+    <div class="marquee-strip" data-aos="fade-in">
+        <div class="marquee-track">
+            <span>✦ Certified Purity</span>
+            <span>✦ Handcrafted Excellence</span>
+            <span>✦ Legacy of Trust</span>
+            <span>✦ BIS Hallmarked</span>
+            <span>✦ Custom Designs</span>
+            <span>✦ Premium Quality</span>
+            <span>✦ Certified Purity</span>
+            <span>✦ Handcrafted Excellence</span>
+            <span>✦ Legacy of Trust</span>
+            <span>✦ BIS Hallmarked</span>
+            <span>✦ Custom Designs</span>
+            <span>✦ Premium Quality</span>
+        </div>
+    </div>
+
+    <!-- Why Us Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <p class="section-label">Why Choose Us</p>
+                <h2 class="section-title">The Maa Durga Promise</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="0">
+                    <div class="feature-icon">✦</div>
+                    <h3>Certified Purity</h3>
+                    <p>All our jewellery is hallmarked and certified for guaranteed purity and quality.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-icon">✦</div>
+                    <h3>Master Craftsmanship</h3>
+                    <p>Each piece is handcrafted by skilled artisans with decades of experience.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-icon">✦</div>
+                    <h3>Legacy of Trust</h3>
+                    <p>Serving families with love and honesty for generations.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-icon">✦</div>
+                    <h3>Custom Designs</h3>
+                    <p>Get your dream jewellery made to your exact specifications and taste.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="section section-dark stats-section">
+        <div class="container">
+            <div class="stats-row">
+                <div class="stat-item" data-aos="zoom-in" data-aos-delay="0">
+                    <h3 class="stat-number" data-target="5000">0</h3>
+                    <p class="stat-label-pub">Happy Customers</p>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item" data-aos="zoom-in" data-aos-delay="150">
+                    <h3 class="stat-number" data-target="5+">0</h3>
+                    <p class="stat-label-pub">Years of Legacy</p>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item" data-aos="zoom-in" data-aos-delay="300">
+                    <h3 class="stat-number" data-target="1200">0</h3>
+                    <p class="stat-label-pub">Unique Designs</p>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item" data-aos="zoom-in" data-aos-delay="450">
+                    <h3 class="stat-number" data-target="100">0</h3>
+                    <p class="stat-label-pub">% Certified Gold</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+</body>
+</html>

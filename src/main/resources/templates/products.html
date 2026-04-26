@@ -1,0 +1,198 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org"-->
+<!--      th:replace="~{layout :: layout(~{::title}, ~{::main})}">-->
+<!--<head>-->
+<!--    <title>Collection — Maa Durga Jewellers</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<main>-->
+<!--    <section class="page-hero">-->
+<!--        <div class="container">-->
+<!--            <p class="section-label">Our Collection</p>-->
+<!--            <h1 class="page-hero-title"-->
+<!--                th:text="${selectedCategory != null ? selectedCategory.name : 'All Jewellery'}"></h1>-->
+<!--            <div class="section-divider"></div>-->
+<!--        </div>-->
+<!--    </section>-->
+
+<!--    <section class="section">-->
+<!--        <div class="container">-->
+
+<!--            &lt;!&ndash; Category Filter Bar &ndash;&gt;-->
+<!--            <div class="filter-bar">-->
+<!--                <a th:href="@{/products}"-->
+<!--                   th:classappend="${selectedCategory == null ? 'active' : ''}">All</a>-->
+<!--                <a th:each="cat : ${categories}"-->
+<!--                   th:href="@{/products/category/{slug}(slug=${cat.slug})}"-->
+<!--                   th:text="${cat.name}"-->
+<!--                   th:classappend="${selectedCategory != null and selectedCategory.id == cat.id ? 'active' : ''}">-->
+<!--                </a>-->
+<!--            </div>-->
+
+<!--            &lt;!&ndash; Products Grid &ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="products-grid" th:if="${not #lists.isEmpty(products)}">&ndash;&gt;-->
+<!--&lt;!&ndash;                <div th:each="product : ${products}" class="product-card">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <a th:href="@{/products/{id}(id=${product.id})}" class="product-card-link">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <div class="product-card-image">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <img th:if="${product.imageUrl != null}" th:src="${product.imageUrl}" th:alt="${product.name}"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <div th:if="${product.imageUrl == null}" class="product-card-placeholder"><span>✦</span></div>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <div class="product-card-overlay"><span>View Details</span></div>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <div class="product-card-info">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <p class="product-card-category" th:text="${product.category != null ? product.category.name : ''}"></p>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <h3 class="product-card-name" th:text="${product.name}"></h3>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <p class="product-card-material" th:text="${product.material}"></p>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <p class="product-card-price" th:text="'₹ ' + ${#numbers.formatDecimal(product.price, 1, 'COMMA', 2, 'POINT')}"></p>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </a>&ndash;&gt;-->
+<!--&lt;!&ndash;                </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+
+
+<!--            &lt;!&ndash; Products Grid &ndash;&gt;-->
+<!--            <div class="products-grid" th:if="${not #lists.isEmpty(products)}">-->
+<!--                <div th:each="product, iterStat : ${products}"-->
+<!--                     class="product-card"-->
+<!--                     data-aos="fade-up"-->
+<!--                     th:attr="data-aos-delay=${iterStat.index * 80}">-->
+<!--                    <a th:href="@{/products/{id}(id=${product.id})}" class="product-card-link">-->
+<!--                        <div class="product-card-image">-->
+<!--                            <img th:if="${product.imageUrl != null}"-->
+<!--                                 th:src="${product.imageUrl}"-->
+<!--                                 th:alt="${product.name}"/>-->
+<!--                            <div th:if="${product.imageUrl == null}"-->
+<!--                                 class="product-card-placeholder"><span>✦</span></div>-->
+<!--                            <div class="product-card-overlay"><span>View Details</span></div>-->
+<!--                        </div>-->
+<!--                        <div class="product-card-info">-->
+<!--                            <p class="product-card-category"-->
+<!--                               th:text="${product.category != null ? product.category.name : ''}"></p>-->
+<!--                            <h3 class="product-card-name" th:text="${product.name}"></h3>-->
+<!--                            <p class="product-card-material" th:text="${product.material}"></p>-->
+<!--                            <p class="product-card-price"-->
+<!--                               th:text="'₹ ' + ${#numbers.formatDecimal(product.price, 1, 'COMMA', 2, 'POINT')}"></p>-->
+<!--                        </div>-->
+<!--                    </a>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            &lt;!&ndash; Empty State &ndash;&gt;-->
+<!--            <div class="empty-state" th:if="${#lists.isEmpty(products)}">-->
+<!--                <span class="empty-icon">✦</span>-->
+<!--                <h3>No products found</h3>-->
+<!--                <p>Check back soon — new pieces are being added.</p>-->
+<!--                <a th:href="@{/products}" class="btn-gold">View All</a>-->
+<!--            </div>-->
+
+<!--        </div>-->
+<!--    </section>-->
+<!--</main>-->
+<!--</body>-->
+<!--</html>-->
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout :: layout(~{::title}, ~{::main})}">
+<head>
+    <title>Collection — Maa Durga Jewellers</title>
+</head>
+<body>
+<main>
+
+    <!-- Page Hero -->
+    <section class="page-hero products-hero">
+        <div class="products-hero-bg"></div>
+        <div class="container">
+            <p class="section-label" data-aos="fade-up">Our Collection</p>
+            <h1 class="page-hero-title" data-aos="fade-up" data-aos-delay="100">
+                <span th:if="${selectedCategory != null}"
+                      th:text="${selectedCategory.name}"
+                      class="shimmer-text"></span>
+                <span th:if="${selectedCategory == null}">
+                    All <span class="shimmer-text">Jewellery</span>
+                </span>
+            </h1>
+            <div class="section-divider" data-aos="fade-up" data-aos-delay="200"></div>
+            <p class="products-hero-sub" data-aos="fade-up" data-aos-delay="300"
+               th:if="${selectedCategory != null}"
+               th:text="${selectedCategory.description}"></p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+
+            <!-- Category Filter Bar -->
+            <div class="filter-bar" data-aos="fade-up">
+                <a th:href="@{/products}"
+                   th:classappend="${selectedCategory == null ? 'active' : ''}">
+                    All
+                </a>
+                <a th:each="cat : ${categories}"
+                   th:href="@{/products/category/{slug}(slug=${cat.slug})}"
+                   th:text="${cat.name}"
+                   th:classappend="${selectedCategory != null
+                       and selectedCategory.id == cat.id ? 'active' : ''}">
+                </a>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="products-grid" th:if="${not #lists.isEmpty(products)}">
+                <div th:each="product, iterStat : ${products}"
+                     class="product-card"
+                     data-aos="fade-up"
+                     th:attr="data-aos-delay=${iterStat.index * 80}">
+                    <a th:href="@{/products/{id}(id=${product.id})}"
+                       class="product-card-link">
+                        <div class="product-card-image">
+                            <img th:if="${product.imageUrl != null}"
+                                 th:src="${product.imageUrl}"
+                                 th:alt="${product.name}"
+                                 loading="lazy"/>
+                            <div th:if="${product.imageUrl == null}"
+                                 class="product-card-placeholder">
+                                <span>✦</span>
+                            </div>
+                            <div class="product-card-overlay">
+                                <span>View Details</span>
+                            </div>
+                            <!-- Featured badge -->
+                            <div class="product-badge"
+                                 th:if="${product.featured}">Featured</div>
+                        </div>
+                        <div class="product-card-info">
+                            <p class="product-card-category"
+                               th:text="${product.category != null
+                                   ? product.category.name : ''}"></p>
+                            <h3 class="product-card-name"
+                                th:text="${product.name}"></h3>
+                            <p class="product-card-material"
+                               th:text="${product.material}"></p>
+                            <div class="product-card-footer">
+                                <p class="product-card-price"
+                                   th:text="'₹ ' + ${#numbers.formatDecimal(
+                                       product.price, 1, 'COMMA', 2, 'POINT')}">
+                                </p>
+                                <span class="product-card-arrow">→</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Empty State -->
+            <div class="empty-state" th:if="${#lists.isEmpty(products)}"
+                 data-aos="fade-up">
+                <div class="empty-icon-box">✦</div>
+                <h3>No products found</h3>
+                <p>Check back soon — new pieces are being added to this collection.</p>
+                <a th:href="@{/products}" class="btn-gold">View All Jewellery</a>
+            </div>
+
+        </div>
+    </section>
+
+</main>
+</body>
+</html>

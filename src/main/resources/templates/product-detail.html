@@ -1,0 +1,256 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org"-->
+<!--      th:replace="~{layout :: layout(~{::title}, ~{::main})}">-->
+<!--<head>-->
+<!--&lt;!&ndash;    <title th:content="${product.name} + ' — Maa Durga Jewellers'">Product Detail</title>&ndash;&gt;-->
+<!--    <title th:text="${product.name} + ' — Maa Durga Jewellers'">Product Detail</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<main>-->
+<!--    <section class="section">-->
+<!--        <div class="container">-->
+<!--            <div class="product-detail-grid">-->
+
+<!--                &lt;!&ndash; Image &ndash;&gt;-->
+<!--                <div class="product-detail-image">-->
+<!--                    <img th:if="${product.imageUrl != null}"-->
+<!--                         th:src="${product.imageUrl}"-->
+<!--                         th:alt="${product.name}"-->
+<!--                         class="detail-img"/>-->
+<!--                    <div th:if="${product.imageUrl == null}" class="detail-img-placeholder">-->
+<!--                        <span>✦</span>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                &lt;!&ndash; Info &ndash;&gt;-->
+<!--                <div class="product-detail-info">-->
+<!--                    <p class="product-card-category"-->
+<!--                       th:text="${product.category != null ? product.category.name : ''}"></p>-->
+<!--                    <h1 class="detail-name" th:text="${product.name}"></h1>-->
+<!--                    <div class="detail-divider"></div>-->
+<!--                    <p class="detail-price"-->
+<!--                       th:text="'₹ ' + ${#numbers.formatDecimal(product.price, 1, 'COMMA', 2, 'POINT')}"></p>-->
+<!--                    <p class="detail-desc" th:text="${product.description}"></p>-->
+
+<!--                    <div class="detail-meta" th:if="${product.material != null or product.weight != null}">-->
+<!--                        <div class="detail-meta-item" th:if="${product.material != null}">-->
+<!--                            <span class="meta-label">Material</span>-->
+<!--                            <span class="meta-value" th:text="${product.material}"></span>-->
+<!--                        </div>-->
+<!--                        <div class="detail-meta-item" th:if="${product.weight != null}">-->
+<!--                            <span class="meta-label">Weight</span>-->
+<!--                            <span class="meta-value" th:text="${product.weight}"></span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+<!--                    <div class="detail-actions">-->
+<!--                        <a th:href="@{/contact}" class="btn-gold">Send Inquiry</a>-->
+<!--                        <a th:href="@{/products}" class="btn-outline">← Back to Collection</a>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--            </div>-->
+<!--        </div>-->
+<!--    </section>-->
+<!--</main>-->
+<!--</body>-->
+<!--</html>-->
+
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout :: layout(~{::title}, ~{::main})}">
+<head>
+    <title th:text="${product.name} + ' — Maa Durga Jewellers'">Product</title>
+</head>
+<body>
+<main>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb-bar">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a th:href="@{/}">Home</a>
+                <span class="bc-sep">✦</span>
+                <a th:href="@{/products}">Collection</a>
+                <span class="bc-sep">✦</span>
+                <a th:if="${product.category != null}"
+                   th:href="@{/products/category/{slug}(slug=${product.category.slug})}"
+                   th:text="${product.category.name}"></a>
+                <span class="bc-sep">✦</span>
+                <span th:text="${product.name}" class="bc-current"></span>
+            </nav>
+        </div>
+    </div>
+
+    <section class="section">
+        <div class="container">
+            <div class="product-detail-grid">
+
+                <!-- Left — Image -->
+                <div class="product-detail-left" data-aos="fade-right">
+                    <div class="detail-image-wrapper">
+                        <img th:if="${product.imageUrl != null}"
+                             th:src="${product.imageUrl}"
+                             th:alt="${product.name}"
+                             class="detail-img"
+                             id="detailMainImg"/>
+                        <div th:if="${product.imageUrl == null}"
+                             class="detail-img-placeholder">
+                            <span>✦</span>
+                        </div>
+
+                        <!-- Image zoom hint -->
+                        <div class="detail-zoom-hint" th:if="${product.imageUrl != null}">
+                            <span>🔍 Hover to zoom</span>
+                        </div>
+                    </div>
+
+                    <!-- Trust badges below image -->
+                    <div class="detail-trust-badges">
+                        <div class="trust-badge">
+                            <span class="trust-icon">✦</span>
+                            <span>BIS Hallmarked</span>
+                        </div>
+                        <div class="trust-badge">
+                            <span class="trust-icon">✦</span>
+                            <span>Certified Pure</span>
+                        </div>
+                        <div class="trust-badge">
+                            <span class="trust-icon">✦</span>
+                            <span>Handcrafted</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right — Info -->
+                <div class="product-detail-right" data-aos="fade-left"
+                     data-aos-delay="150">
+
+                    <!-- Category -->
+                    <p class="product-card-category"
+                       th:text="${product.category != null
+                           ? product.category.name : ''}"></p>
+
+                    <!-- Name -->
+                    <h1 class="detail-name" th:text="${product.name}"></h1>
+
+                    <!-- Divider -->
+                    <div class="detail-divider"></div>
+
+                    <!-- Price -->
+                    <div class="detail-price-row">
+                        <p class="detail-price"
+                           th:text="'₹ ' + ${#numbers.formatDecimal(
+                               product.price, 1, 'COMMA', 2, 'POINT')}"></p>
+                        <span class="detail-price-note">Inclusive of all taxes</span>
+                    </div>
+
+                    <!-- Description -->
+                    <p class="detail-desc" th:text="${product.description}"></p>
+
+                    <!-- Meta specs -->
+                    <div class="detail-meta"
+                         th:if="${product.material != null
+                             or product.weight != null}">
+                        <div class="detail-meta-item"
+                             th:if="${product.material != null}">
+                            <span class="meta-label">Material</span>
+                            <span class="meta-value"
+                                  th:text="${product.material}"></span>
+                        </div>
+                        <div class="detail-meta-divider"
+                             th:if="${product.material != null
+                                 and product.weight != null}"></div>
+                        <div class="detail-meta-item"
+                             th:if="${product.weight != null}">
+                            <span class="meta-label">Weight</span>
+                            <span class="meta-value"
+                                  th:text="${product.weight}"></span>
+                        </div>
+                    </div>
+
+                    <!-- CTA Buttons -->
+                    <div class="detail-actions">
+                        <a th:href="@{/contact}" class="btn-gold btn-detail-cta">
+                            <span>Send Inquiry</span>
+                            <span class="btn-icon">✦</span>
+                        </a>
+                        <a th:href="@{/products}" class="btn-outline">
+                            ← Back to Collection
+                        </a>
+                    </div>
+
+                    <!-- WhatsApp quick inquiry -->
+                    <a class="whatsapp-btn"
+                       th:href="'https://wa.me/918707859120?text=Hi, I am interested in '
+                           + ${product.name} + ' priced at ₹'
+                           + ${#numbers.formatDecimal(product.price,1,'COMMA',2,'POINT')}"
+                       target="_blank">
+                        <span class="whatsapp-icon">💬</span>
+                        <span>Quick Inquiry on WhatsApp</span>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- Image zoom script -->
+<!--<script th:inline="javascript">-->
+<!--    document.addEventListener('DOMContentLoaded', function () {-->
+<!--        const img = document.getElementById('detailMainImg');-->
+<!--        if (!img) return;-->
+
+<!--        img.addEventListener('mousemove', function (e) {-->
+<!--            const rect   = img.getBoundingClientRect();-->
+<!--            const x      = ((e.clientX - rect.left) / rect.width)  * 100;-->
+<!--            const y      = ((e.clientY - rect.top)  / rect.height) * 100;-->
+<!--            img.style.transformOrigin = x + '% ' + y + '%';-->
+<!--            img.style.transform       = 'scale(1.6)';-->
+<!--        });-->
+
+<!--        img.addEventListener('mouseleave', function () {-->
+<!--            img.style.transform       = 'scale(1)';-->
+<!--            img.style.transformOrigin = 'center center';-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
+
+
+<script th:inline="javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+
+        // Image zoom on hover
+        const img = document.getElementById('detailMainImg');
+        if (img) {
+            img.addEventListener('mousemove', function (e) {
+                const rect = img.getBoundingClientRect();
+                const x    = ((e.clientX - rect.left) / rect.width)  * 100;
+                const y    = ((e.clientY - rect.top)  / rect.height) * 100;
+                img.style.transformOrigin = x + '% ' + y + '%';
+                img.style.transform       = 'scale(1.6)';
+            });
+            img.addEventListener('mouseleave', function () {
+                img.style.transform       = 'scale(1)';
+                img.style.transformOrigin = 'center center';
+            });
+        }
+
+        // Update sticky button to use WhatsApp on mobile
+        const stickyBtn = document.querySelector('.sticky-inquiry');
+        const waBtn     = document.querySelector('.whatsapp-btn');
+        if (stickyBtn && waBtn && window.innerWidth <= 768) {
+            stickyBtn.href      = waBtn.href;
+            stickyBtn.target    = '_blank';
+            stickyBtn.innerHTML = '💬 &nbsp; WhatsApp Inquiry';
+        }
+
+    });
+</script>
+
+</body>
+</html>

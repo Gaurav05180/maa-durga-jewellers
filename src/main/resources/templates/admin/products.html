@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Products — Admin</title>
+    <link rel="stylesheet" th:href="@{/css/admin.css}"/>
+</head>
+<body class="admin-body">
+
+<!-- Mobile overlay -->
+<div class="admin-overlay" id="adminOverlay"></div>
+
+<!-- Mobile top bar -->
+<div class="admin-topbar">
+    <span class="admin-topbar-title">✦ Admin Panel</span>
+    <button class="admin-menu-toggle" id="adminMenuToggle">
+        <span></span><span></span><span></span>
+    </button>
+</div>
+
+<div class="admin-layout">
+    <aside class="admin-sidebar">
+        <div class="admin-logo">✦ Admin Panel</div>
+        <nav class="admin-nav">
+            <a th:href="@{/admin/dashboard}">Dashboard</a>
+            <a th:href="@{/admin/products}" class="active">Products</a>
+            <a th:href="@{/admin/categories}">Categories</a>
+            <a th:href="@{/admin/inquiries}">Inquiries</a>
+            <a th:href="@{/}">View Site</a>
+            <a th:href="@{/admin/logout}" class="logout">Logout</a>
+        </nav>
+    </aside>
+    <main class="admin-main">
+        <div class="admin-header">
+            <h1>Products</h1>
+            <a th:href="@{/admin/products/new}" class="btn-admin-gold">+ Add Product</a>
+        </div>
+
+        <div class="alert-success" th:if="${successMessage}" th:text="${successMessage}"></div>
+
+        <div class="admin-card">
+            <table class="admin-table">
+                <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Featured</th>
+                    <th>Active</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="product : ${products}">
+                    <td>
+                        <img th:if="${product.imageUrl != null}"
+                             th:src="${product.imageUrl}"
+                             class="table-thumb" th:alt="${product.name}"/>
+                        <span th:if="${product.imageUrl == null}">—</span>
+                    </td>
+                    <td th:text="${product.name}"></td>
+                    <td th:text="${product.category != null ? product.category.name : '—'}"></td>
+                    <td th:text="'₹ ' + ${#numbers.formatDecimal(product.price,1,'COMMA',2,'POINT')}"></td>
+                    <td>
+                        <a th:href="@{/admin/products/toggle-featured/{id}(id=${product.id})}"
+                           th:class="${product.featured ? 'badge-status read' : 'badge-status unread'}"
+                           th:text="${product.featured ? 'Yes' : 'No'}"></a>
+                    </td>
+                    <td>
+                        <a th:href="@{/admin/products/toggle-active/{id}(id=${product.id})}"
+                           th:class="${product.active ? 'badge-status read' : 'badge-status unread'}"
+                           th:text="${product.active ? 'Active' : 'Hidden'}"></a>
+                    </td>
+                    <td class="action-btns">
+                        <a th:href="@{/admin/products/edit/{id}(id=${product.id})}"
+                           class="btn-edit">Edit</a>
+                        <a th:href="@{/admin/products/delete/{id}(id=${product.id})}"
+                           class="btn-delete"
+                           onclick="return confirm('Delete this product?')">Delete</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</div>
+
+<script>
+    const toggle   = document.getElementById('adminMenuToggle');
+    const sidebar  = document.querySelector('.admin-sidebar');
+    const overlay  = document.getElementById('adminOverlay');
+
+    toggle.addEventListener('click', function () {
+        sidebar.classList.toggle('open');
+        overlay.classList.toggle('active');
+    });
+
+    overlay.addEventListener('click', function () {
+        sidebar.classList.remove('open');
+        overlay.classList.remove('active');
+    });
+</script>
+
+</body>
+</html>
